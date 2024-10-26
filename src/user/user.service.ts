@@ -69,8 +69,15 @@ export class UserService {
                 { label: 'Tasks this week', value: weekTasks }
             ]
         }
+    }
 
-        return
+    async getUserIntervalCount(userId: string) {
+        return this.prisma.user.findUnique({
+            where: { id: userId },
+            select: {
+                intervalCount: true
+            }
+        })
     }
 
     async create(dto: AuthDto) {
